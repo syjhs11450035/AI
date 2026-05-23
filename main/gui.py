@@ -29,7 +29,7 @@ class AIHubGUI:
         self.ai = OnlineAI()
         self._set_process_dpi_awareness()
         self.root = tk.Tk()
-        self.root.title("JCZ AI Hub")
+        self.root.title("JCZ AI 中樞")
         self.root.geometry("1180x760")
         self.root.minsize(980, 640)
         self.root.configure(bg=COLORS["bg"])
@@ -38,7 +38,7 @@ class AIHubGUI:
 
         self.mode = tk.StringVar(value="prototype")
         self.use_search = tk.BooleanVar(value=False)
-        self.status = tk.StringVar(value=f"Ready - data saved in {PATHS.data_dir}")
+        self.status = tk.StringVar(value=f"就緒 - 資料會儲存在 {PATHS.data_dir}")
         self.frames: dict[str, tk.Frame] = {}
         self.nav_buttons: dict[str, tk.Button] = {}
 
@@ -72,14 +72,14 @@ class AIHubGUI:
             fieldbackground=COLORS["panel"],
             borderwidth=0,
             rowheight=32,
-            font=("Segoe UI", 10),
+            font=("Microsoft JhengHei UI", 10),
         )
         style.configure(
             "Hub.Treeview.Heading",
             background=COLORS["panel_soft"],
             foreground=COLORS["text"],
             borderwidth=0,
-            font=("Segoe UI", 10, "bold"),
+            font=("Microsoft JhengHei UI", 10, "bold"),
         )
         style.map("Hub.Treeview", background=[("selected", COLORS["accent"])])
 
@@ -98,20 +98,20 @@ class AIHubGUI:
 
         tk.Label(
             sidebar,
-            text="JCZ AI Hub",
+            text="JCZ AI 中樞",
             bg=COLORS["panel"],
             fg=COLORS["text"],
-            font=("Segoe UI", 19, "bold"),
+            font=("Microsoft JhengHei UI", 19, "bold"),
         ).pack(anchor="w", padx=22, pady=(24, 2))
         tk.Label(
             sidebar,
-            text="Online AI workbench",
+            text="聯網 AI 工作台",
             bg=COLORS["panel"],
             fg=COLORS["muted"],
-            font=("Segoe UI", 10),
+            font=("Microsoft JhengHei UI", 10),
         ).pack(anchor="w", padx=22, pady=(0, 22))
 
-        for key, label in (("chat", "AI Studio"), ("models", "Model Lab"), ("data", "Data Vault")):
+        for key, label in (("chat", "AI 工作室"), ("models", "模型能力"), ("data", "資料庫")):
             button = tk.Button(
                 sidebar,
                 text=label,
@@ -122,7 +122,7 @@ class AIHubGUI:
                 padx=18,
                 pady=12,
                 cursor="hand2",
-                font=("Segoe UI", 11, "bold"),
+                font=("Microsoft JhengHei UI", 11, "bold"),
                 bg=COLORS["panel"],
                 fg=COLORS["muted"],
                 activebackground=COLORS["panel_soft"],
@@ -135,10 +135,10 @@ class AIHubGUI:
 
         tk.Label(
             sidebar,
-            text="Expert mode",
+            text="專家模式",
             bg=COLORS["panel"],
             fg=COLORS["muted"],
-            font=("Segoe UI", 9, "bold"),
+            font=("Microsoft JhengHei UI", 9, "bold"),
         ).pack(anchor="w", padx=22, pady=(0, 8))
 
         mode_box = tk.Frame(sidebar, bg=COLORS["panel"])
@@ -158,31 +158,31 @@ class AIHubGUI:
                 fg=COLORS["text"],
                 activebackground=COLORS["accent_hover"],
                 activeforeground=COLORS["text"],
-                font=("Segoe UI", 9),
+                font=("Microsoft JhengHei UI", 9),
             )
             button.pack(fill="x", pady=3)
 
         search = tk.Checkbutton(
             sidebar,
-            text="Use Google Search data",
+            text="使用 Google 搜尋資料",
             variable=self.use_search,
             bg=COLORS["panel"],
             fg=COLORS["text"],
             selectcolor=COLORS["input"],
             activebackground=COLORS["panel"],
             activeforeground=COLORS["text"],
-            font=("Segoe UI", 10),
+            font=("Microsoft JhengHei UI", 10),
         )
         search.pack(anchor="w", padx=20, pady=18)
 
-        availability = "Online keys found" if self.ai.available() else "Offline prototype"
+        availability = "已找到線上金鑰" if self.ai.available() else "離線原型模式"
         color = COLORS["ok"] if self.ai.available() else COLORS["muted"]
         tk.Label(
             sidebar,
             text=availability,
             bg=COLORS["panel"],
             fg=color,
-            font=("Segoe UI", 10, "bold"),
+            font=("Microsoft JhengHei UI", 10, "bold"),
         ).pack(side="bottom", anchor="w", padx=22, pady=(0, 24))
 
     def _build_workspace(self) -> None:
@@ -197,17 +197,17 @@ class AIHubGUI:
 
         tk.Label(
             header,
-            text="AI Studio",
+            text="AI 工作室",
             bg=COLORS["bg"],
             fg=COLORS["text"],
-            font=("Segoe UI", 22, "bold"),
+            font=("Microsoft JhengHei UI", 22, "bold"),
         ).grid(row=0, column=0, sticky="w")
         tk.Label(
             header,
             textvariable=self.status,
             bg=COLORS["bg"],
             fg=COLORS["muted"],
-            font=("Segoe UI", 10),
+            font=("Microsoft JhengHei UI", 10),
         ).grid(row=1, column=0, sticky="w", pady=(4, 0))
 
         body = tk.Frame(workspace, bg=COLORS["bg"])
@@ -230,17 +230,17 @@ class AIHubGUI:
         toolbar.columnconfigure(0, weight=1)
         tk.Label(
             toolbar,
-            text="Ask, prototype, debug, and turn ideas into code.",
+            text="提問、打樣、除錯，或把想法變成程式碼。",
             bg=COLORS["panel"],
             fg=COLORS["text"],
-            font=("Segoe UI", 12, "bold"),
+            font=("Microsoft JhengHei UI", 12, "bold"),
         ).grid(row=0, column=0, sticky="w", padx=16, pady=14)
         tk.Label(
             toolbar,
-            text="Enter sends",
+            text="按 Enter 送出",
             bg=COLORS["panel"],
             fg=COLORS["muted"],
-            font=("Segoe UI", 10),
+            font=("Microsoft JhengHei UI", 10),
         ).grid(row=0, column=1, sticky="e", padx=16)
 
         self.output = tk.Text(
@@ -253,14 +253,14 @@ class AIHubGUI:
             fg=COLORS["text"],
             insertbackground=COLORS["text"],
             selectbackground=COLORS["accent"],
-            font=("Segoe UI", 11),
+            font=("Microsoft JhengHei UI", 11),
             relief="flat",
             highlightbackground=COLORS["border"],
             highlightcolor=COLORS["accent"],
             highlightthickness=1,
         )
         self.output.grid(row=1, column=0, sticky="nsew")
-        self.output.insert("end", "Welcome. Choose a mode, type a request, and send it.\n")
+        self.output.insert("end", "歡迎使用。選擇模式、輸入需求，然後送出。\n")
 
         input_bar = tk.Frame(frame, bg=COLORS["bg"])
         input_bar.grid(row=2, column=0, sticky="ew", pady=(12, 0))
@@ -271,7 +271,7 @@ class AIHubGUI:
             bg=COLORS["input"],
             fg=COLORS["text"],
             insertbackground=COLORS["text"],
-            font=("Segoe UI", 12),
+            font=("Microsoft JhengHei UI", 12),
             relief="flat",
             highlightbackground=COLORS["border"],
             highlightcolor=COLORS["accent"],
@@ -281,7 +281,7 @@ class AIHubGUI:
         self.prompt.bind("<Return>", lambda _event: self._send())
         tk.Button(
             input_bar,
-            text="Send",
+            text="送出",
             command=self._send,
             bd=0,
             padx=24,
@@ -291,7 +291,7 @@ class AIHubGUI:
             fg="white",
             activebackground=COLORS["accent_hover"],
             activeforeground="white",
-            font=("Segoe UI", 11, "bold"),
+            font=("Microsoft JhengHei UI", 11, "bold"),
         ).grid(row=0, column=1, padx=(10, 0))
         return frame
 
@@ -303,17 +303,17 @@ class AIHubGUI:
 
         tk.Label(
             frame,
-            text="Prototype capabilities",
+            text="原型能力清單",
             bg=COLORS["bg"],
             fg=COLORS["text"],
-            font=("Segoe UI", 15, "bold"),
+            font=("Microsoft JhengHei UI", 15, "bold"),
         ).grid(row=0, column=0, sticky="w", pady=(0, 12))
 
         columns = ("title", "category", "status")
         tree = ttk.Treeview(frame, columns=columns, show="headings", style="Hub.Treeview")
-        tree.heading("title", text="Feature")
-        tree.heading("category", text="Area")
-        tree.heading("status", text="Status")
+        tree.heading("title", text="功能")
+        tree.heading("category", text="類型")
+        tree.heading("status", text="狀態")
         tree.column("title", width=360)
         tree.column("category", width=160)
         tree.column("status", width=180)
@@ -328,16 +328,16 @@ class AIHubGUI:
         frame.columnconfigure(0, weight=1)
 
         entries = (
-            ("Application directory", PATHS.app_dir),
-            ("User content", PATHS.data_dir),
-            ("Project modules", PATHS.module_dir),
-            ("API key folder", PATHS.api_key_dir),
+            ("應用程式目錄", PATHS.app_dir),
+            ("使用者內容", PATHS.data_dir),
+            ("專案模組", PATHS.module_dir),
+            ("API 金鑰資料夾", PATHS.api_key_dir),
         )
         for index, (label, value) in enumerate(entries):
             row = tk.Frame(frame, bg=COLORS["panel"], highlightbackground=COLORS["border"], highlightthickness=1)
             row.grid(row=index, column=0, sticky="ew", pady=6)
             row.columnconfigure(1, weight=1)
-            tk.Label(row, text=label, bg=COLORS["panel"], fg=COLORS["muted"], font=("Segoe UI", 10, "bold")).grid(
+            tk.Label(row, text=label, bg=COLORS["panel"], fg=COLORS["muted"], font=("Microsoft JhengHei UI", 10, "bold")).grid(
                 row=0, column=0, sticky="w", padx=16, pady=14
             )
             tk.Label(row, text=str(value), bg=COLORS["panel"], fg=COLORS["text"], font=("Consolas", 10)).grid(
@@ -363,23 +363,23 @@ class AIHubGUI:
         if not prompt:
             return
         self.prompt.delete(0, "end")
-        self.output.insert("end", f"\nYou\n{prompt}\n\nAI\nWorking...\n")
+        self.output.insert("end", f"\n你\n{prompt}\n\nAI\n思考中...\n")
         self.output.see("end")
-        self.status.set("Thinking...")
+        self.status.set("思考中...")
         threading.Thread(target=self._run_ai, args=(prompt,), daemon=True).start()
 
     def _run_ai(self, prompt: str) -> None:
         try:
             response = self.ai.ask(prompt, mode=self.mode.get(), use_search=self.use_search.get())
-            save_path = save_json("conversation", {"prompt": prompt, "mode": self.mode.get(), "response": response.__dict__})
+            save_path = save_json("對話", {"prompt": prompt, "mode": self.mode.get(), "response": response.__dict__})
             self.root.after(0, self._show_response, response.provider, response.text, save_path)
         except Exception as exc:
-            self.root.after(0, lambda exc=exc: messagebox.showerror("AI error", str(exc)))
+            self.root.after(0, lambda exc=exc: messagebox.showerror("AI 錯誤", str(exc)))
 
     def _show_response(self, provider: str, text: str, save_path) -> None:
         self.output.insert("end", f"\n[{provider}]\n{text}\n")
         self.output.see("end")
-        self.status.set(f"Saved - {save_path}")
+        self.status.set(f"已儲存 - {save_path}")
 
 
 def run_gui() -> None:

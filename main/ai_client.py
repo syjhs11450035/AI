@@ -33,21 +33,21 @@ class OnlineAI:
             try:
                 return AIResponse(self._gemini(prompt, system_prompt), "Gemini", True)
             except Exception as exc:
-                return AIResponse(f"Gemini failed: {exc}\n\n{self._offline(prompt, mode)}", "Offline fallback", False)
+                return AIResponse(f"Gemini 呼叫失敗：{exc}\n\n{self._offline(prompt, mode)}", "離線備援", False)
         if self.groq_key:
             try:
                 return AIResponse(self._groq(prompt, system_prompt), "Groq", True)
             except Exception as exc:
-                return AIResponse(f"Groq failed: {exc}\n\n{self._offline(prompt, mode)}", "Offline fallback", False)
-        return AIResponse(self._offline(prompt, mode), "Offline prototype", False)
+                return AIResponse(f"Groq 呼叫失敗：{exc}\n\n{self._offline(prompt, mode)}", "離線備援", False)
+        return AIResponse(self._offline(prompt, mode), "離線原型", False)
 
     def _system_prompt(self, mode: str, context: str) -> str:
         mode_name = EXPERT_MODES.get(mode, EXPERT_MODES["prototype"])
         return (
-            "You are a practical AI product engineer. Reply in Traditional Chinese unless asked otherwise.\n"
-            f"Current mode: {mode_name}.\n"
-            "Only training and live knowledge should use online AI. Keep user files under ai-data.\n"
-            "Available model features:\n"
+            "你是一位務實的 AI 產品工程師。除非使用者要求其他語言，否則一律使用繁體中文回答。\n"
+            f"目前模式：{mode_name}。\n"
+            "只有訓練與即時知識功能可以使用聯網 AI。使用者內容必須存放在 ai-data。\n"
+            "可用模型功能：\n"
             f"{capability_summary()}\n"
             f"{context}"
         )
@@ -58,7 +58,7 @@ class OnlineAI:
             f"gemini-2.0-flash:generateContent?key={self.gemini_key}"
         )
         payload = {
-            "contents": [{"parts": [{"text": f"{system_prompt}\n\nUser request:\n{prompt}"}]}],
+            "contents": [{"parts": [{"text": f"{system_prompt}\n\n使用者需求：\n{prompt}"}]}],
             "generationConfig": {"temperature": 0.7, "maxOutputTokens": 2048},
         }
         data = self._post_json(url, payload)
@@ -80,14 +80,14 @@ class OnlineAI:
 
     def _search(self, query: str) -> str:
         if not self.serpapi_key:
-            return "\nSearch requested, but SERPAPI_API_KEY is not configured.\n"
+            return "\n已要求搜尋，但尚未設定 SERPAPI_API_KEY。\n"
         params = urllib.parse.urlencode({"engine": "google", "q": query, "num": 5, "api_key": self.serpapi_key})
         with urllib.request.urlopen(f"https://serpapi.com/search.json?{params}", timeout=20) as response:
             data = json.loads(response.read().decode("utf-8"))
         snippets = []
         for item in data.get("organic_results", [])[:5]:
             snippets.append(f"- {item.get('title', '')}: {item.get('snippet', '')} ({item.get('link', '')})")
-        return "\nLive search context:\n" + "\n".join(snippets) + "\n"
+        return "\n即時搜尋內容：\n" + "\n".join(snippets) + "\n"
 
     def _post_json(self, url: str, payload: dict, headers: dict[str, str] | None = None) -> dict:
         body = json.dumps(payload).encode("utf-8")
@@ -105,12 +105,12 @@ class OnlineAI:
     def _offline(self, prompt: str, mode: str) -> str:
         mode_name = EXPERT_MODES.get(mode, EXPERT_MODES["prototype"])
         return (
-            f"[{mode_name}] Offline prototype response\n\n"
-            "No GEMINI_API_KEY or GROQ_API_KEY is configured, so online AI training is disabled.\n"
-            "Use this local planning skeleton first:\n"
-            "1. Target feature\n"
-            "2. Input data\n"
-            "3. Expected output\n"
-            "4. Risks and tests\n\n"
-            f"User input: {prompt}"
+            f"[{mode_name}] 離線原型回覆\n\n"
+            "目前尚未設定 GEMINI_API_KEY 或 GROQ_API_KEY，因此不會進行聯網 AI 訓練。\n"
+            "你可以先用這個本地規劃骨架整理需求：\n"
+            "1. 目標功能\n"
+            "2. 輸入資料\n"
+            "3. 預期輸出\n"
+            "4. 風險與測試\n\n"
+            f"你的輸入：{prompt}"
         )

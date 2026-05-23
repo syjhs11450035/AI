@@ -13,6 +13,6 @@ def run_app(prefer_gui: bool = True) -> int:
             run_gui()
             return 0
         except Exception:
-            print("GUI failed. Falling back to terminal mode.")
+            print("GUI 啟動失敗，改用終端模式。")
             print(traceback.format_exc())
     return run_cli()

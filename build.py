@@ -37,19 +37,19 @@ def pyinstaller_command(console: bool = False) -> list[str]:
         command.append("--noconsole" if system == "windows" else "--windowed")
     if system == "windows":
         command.extend(["--target-architecture", "x86_64"])
-    print(f"Output: {ROOT / 'dist' / system / (APP_NAME + suffix)}")
+    print(f"輸出位置：{ROOT / 'dist' / system / (APP_NAME + suffix)}")
     return command
 
 
 def build(console: bool = False) -> int:
     command = pyinstaller_command(console=console)
-    print("Running:", " ".join(command))
+    print("執行打包：", " ".join(command))
     return subprocess.call(command, cwd=ROOT)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build JCZ AI Hub for this device.")
-    parser.add_argument("--console", action="store_true", help="show terminal window in packaged app")
+    parser = argparse.ArgumentParser(description="依照目前裝置打包 JCZ AI 中樞。")
+    parser.add_argument("--console", action="store_true", help="打包後顯示終端視窗，方便除錯")
     args = parser.parse_args()
     return build(console=args.console)
 

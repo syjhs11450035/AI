@@ -13,9 +13,9 @@ from app import run_app  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="JCZ AI Hub")
-    parser.add_argument("--cli", action="store_true", help="start terminal mode")
-    parser.add_argument("--gui", action="store_true", help="start GUI mode")
+    parser = argparse.ArgumentParser(description="JCZ AI 中樞")
+    parser.add_argument("--cli", action="store_true", help="啟動終端模式")
+    parser.add_argument("--gui", action="store_true", help="啟動圖形介面模式")
     return parser.parse_args()
 
 

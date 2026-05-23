@@ -1,38 +1,38 @@
-# JCZ AI Hub
+# JCZ AI 中樞
 
-`main.py` is the entry point. Run it directly and it starts the GUI by default. If the GUI fails, it falls back to terminal mode.
+`main.py` 是專案入口。直接執行會優先啟動 GUI；如果 GUI 啟動失敗，會自動退回終端模式。
 
-## Run
+## 執行
 
 ```powershell
 python main.py
 ```
 
-Terminal mode:
+終端模式：
 
 ```powershell
 python main.py --cli
 ```
 
-## Build
+## 打包
 
-Build for the current device:
+依照目前裝置打包：
 
 ```powershell
 python build.py
 ```
 
-The packaged app is written to `dist/<system>/JCZ_AI_Hub`. On Windows the packaged app uses `--noconsole`, so it does not open an extra terminal window.
+打包後的檔案會輸出到 `dist/<系統>/JCZ_AI_Hub`。在 Windows 上預設使用 `--noconsole`，不會跳出額外的終端視窗。
 
-Debug build with a visible terminal:
+需要除錯、想看終端輸出時：
 
 ```powershell
 python build.py --console
 ```
 
-## Data Layout
+## 資料位置
 
-User content is stored beside the application:
+使用者內容會儲存在應用程式目錄旁：
 
 ```text
 ai-data/
@@ -42,7 +42,7 @@ ai-data/
   cache/
 ```
 
-Project modules are organized under:
+## 專案結構
 
 ```text
 main.py
@@ -60,17 +60,17 @@ main/
   temp/
 ```
 
-`main/api-key/` is ignored by git. You can provide keys with `.env` or `main/api-key/api_keys.json`:
+`main/api-key/` 不會進入 git。你可以用 `.env` 或 `main/api-key/api_keys.json` 提供金鑰：
 
 ```json
 {
-  "GEMINI_API_KEY": "your-key",
-  "GROQ_API_KEY": "your-key",
-  "SERPAPI_API_KEY": "your-key"
+  "GEMINI_API_KEY": "你的金鑰",
+  "GROQ_API_KEY": "你的金鑰",
+  "SERPAPI_API_KEY": "你的金鑰"
 }
 ```
 
-## Modes
+## 專家模式
 
 - 生成原型代碼
 - 檢查邏輯死鎖
@@ -79,8 +79,8 @@ main/
 - 分析調試錯誤
 - 優化提示詞
 
-## Model Feature Prototypes
+## 原型能力
 
-The app lists prototypes for text-to-speech, music, image generation/editing, voice conversation, video generation, Google Search data, Google Maps data, document/image analysis, low-latency responses, video analysis, speech-to-text, Gemini chat, and high-thinking workflows.
+此應用會列出文字轉語音、生成音樂、圖片生成與編輯、語音對話、影片生成、Google 搜尋資料、Google 地圖資料、圖片分析、低延遲回應、影片分析、語音轉文字、Gemini 聊天與高思考模式等能力。
 
-Live training and current-knowledge features use online AI only when API keys are configured. Without keys, the app stays offline and returns a local prototype response.
+只有在設定 API 金鑰後，訓練與即時知識功能才會使用聯網 AI。沒有金鑰時，應用會保持離線並回傳本地原型回覆。
