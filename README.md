@@ -46,6 +46,7 @@ Project modules are organized under:
 
 ```text
 main.py
+build.py
 main/
   app.py
   gui.py

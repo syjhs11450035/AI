@@ -35,6 +35,7 @@ logs/
 ai-data/
 main/temp/*
 !main/temp/.gitkeep
+main/legacy/
 *.db
 *.sqlite3
 
