@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets
+.env
+.env.local
+main/api-key/*
+!main/api-key/.gitkeep
+
+# User data
+data/
+logs/
+ai-data/
+main/temp/*
+!main/temp/.gitkeep
+*.db
+*.sqlite3
+
+# System files
+.DS_Store
+Thumbs.db

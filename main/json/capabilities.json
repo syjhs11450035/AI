@@ -1,0 +1,20 @@
+[
+  {"key": "audio_spark_tts", "title": "Convert text to speech"},
+  {"key": "music_note", "title": "Generate music"},
+  {"key": "database_auth", "title": "Add database and auth"},
+  {"key": "image_edit_auto", "title": "Create and edit images"},
+  {"key": "live_voice", "title": "Add voice conversations"},
+  {"key": "movie", "title": "Animate images into video"},
+  {"key": "google_search", "title": "Use Google Search data"},
+  {"key": "google_maps", "title": "Use Google Maps data"},
+  {"key": "image", "title": "Generate high-quality images"},
+  {"key": "spark", "title": "Add Gemini intelligence"},
+  {"key": "voice_chat", "title": "Add a Gemini chatbot"},
+  {"key": "video_spark", "title": "Generate video from text"},
+  {"key": "aspect_ratio", "title": "Control image aspect ratios"},
+  {"key": "document_scanner", "title": "Analyze images"},
+  {"key": "bolt", "title": "Add low-latency responses"},
+  {"key": "video_library", "title": "Analyze video content"},
+  {"key": "speech_to_text", "title": "Transcribe audio"},
+  {"key": "network_intelligence", "title": "Enable high thinking"}
+]
