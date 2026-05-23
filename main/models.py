@@ -44,6 +44,14 @@ EXPERT_MODES: dict[str, str] = {
 }
 
 
+LOCAL_MODELS: dict[str, str] = {
+    "offline-fast": "本地快速模型",
+    "offline-code": "本地程式模型",
+    "offline-reason": "本地推理模型",
+    "offline-project": "本地專案模型",
+}
+
+
 def capability_summary() -> str:
     lines = []
     for item in CAPABILITIES:
